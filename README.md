@@ -1,4 +1,4 @@
-# Hide Out of Stock Products - Addon para Odoo
+# Hide Out of Stock Products - Addon para Odoo 18
 
 Este addon permite ocultar automáticamente productos sin stock del sitio web de comercio electrónico de Odoo, con funcionalidad inteligente para priorizar productos que llevan más tiempo agotados.
 
