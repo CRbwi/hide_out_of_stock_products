@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View for Hide Stock Configuration -->
+    <record id="view_hide_stock_config_form" model="ir.ui.view">
+        <field name="name">hide.stock.config.form</field>
+        <field name="model">hide.stock.config</field>
+        <field name="arch" type="xml">
+            <form string="Configuración de Ocultación por Stock">
+                <sheet>
+                    <!-- Botones principales con mejor espaciado -->
+                    <div class="oe_button_box" name="button_box" style="margin-bottom: 20px;">
+                        <button name="action_view_hidden_products" 
+                                type="object" 
+                                class="oe_stat_button" 
+                                icon="fa-eye-slash">
+                            <field name="products_hidden_count" widget="statinfo" 
+                                   string="Productos Ocultos"/>
+                        </button>
+                    </div>
+                    
+                    <!-- Panel de acciones principales -->
+                    <div style="margin-bottom: 25px; padding: 15px; border: 2px solid #e9ecef; border-radius: 8px; background-color: #f8f9fa;">
+                        <h4 style="margin-bottom: 15px; color: #495057;">🚀 Acciones Rápidas</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <button name="action_update_product_visibility" 
+                                    string="🔄 Actualizar Ahora" 
+                                    type="object" 
+                                    class="btn btn-primary"
+                                    style="min-width: 180px; margin: 5px;"
+                                    confirm="¿Actualizar la visibilidad de productos ahora?"
+                                    help="Ejecuta inmediatamente la actualización de visibilidad"/>
+                            
+                            <button name="action_run_analysis" 
+                                    string="📊 Ejecutar Análisis" 
+                                    type="object" 
+                                    class="btn btn-info"
+                                    style="min-width: 180px; margin: 5px;"
+                                    help="Analiza el estado actual de stock sin hacer cambios"/>
+                            
+                            <button name="action_view_hidden_products" 
+                                    string="👁️ Ver Productos Ocultos" 
+                                    type="object" 
+                                    class="btn btn-secondary"
+                                    style="min-width: 180px; margin: 5px;"
+                                    help="Ve la lista de productos actualmente ocultos"/>
+                            
+                            <button name="action_restore_all_products" 
+                                    string="🔓 Restaurar Todos" 
+                                    type="object" 
+                                    class="btn btn-warning"
+                                    style="min-width: 180px; margin: 5px;"
+                                    confirm="¿Restaurar TODOS los productos ocultos?"
+                                    help="Hace visibles todos los productos ocultos por stock"/>
+                        </div>
+                    </div>
+                    
+                    <div class="oe_title">
+                        <h1>
+                            <field name="website_id" options="{'no_create': True}"/>
+                        </h1>
+                    </div>
+                    
+                    <!-- Configuración principal con espaciado mejorado -->
+                    <div style="margin: 20px 0;">
+                        <group>
+                            <group name="basic_config" string="⚙️ Configuración Básica" style="margin-right: 20px;">
+                                <field name="active"/>
+                                <field name="hide_strategy" widget="radio"/>
+                                <field name="smart_days_threshold" 
+                                       invisible="hide_strategy != 'smart_time_based'"
+                                       help="Días sin stock para la estrategia inteligente (300 = 10 meses)"/>
+                                <field name="custom_days_threshold" 
+                                       invisible="hide_strategy != 'custom_days'"
+                                       help="Número de días sin stock para considerar ocultar (ej: 30, 60, 180, 300)"/>
+                            </group>
+                            
+                            <group name="behavior_config" string="🎯 Comportamiento" style="margin-left: 20px;">
+                                <field name="hide_completely"/>
+                                <field name="show_notification" 
+                                       invisible="hide_completely"/>
+                                <field name="auto_update"/>
+                                <field name="log_changes"/>
+                                <field name="last_update" readonly="1"/>
+                            </group>
+                        </group>
+                        
+                        <!-- Información visual del tiempo configurado -->
+                        <div style="margin: 25px 0; padding: 15px; border-radius: 8px; background-color: #f1f3f4;">
+                            <h4 style="margin-bottom: 15px;">⏰ Información de Configuración de Tiempo</h4>
+                            <div class="alert alert-info" invisible="hide_strategy != 'smart_time_based'" style="margin: 10px 0;">
+                                <p><strong>Estrategia Inteligente:</strong> Configurada para ocultar productos sin stock por más de <span style="color: #007bff; font-weight: bold;"><field name="smart_days_threshold"/> días</span></p>
+                                <p><em>Puedes cambiar este valor arriba para ajustar el período</em></p>
+                            </div>
+                            <div class="alert alert-success" invisible="hide_strategy != 'custom_days'" style="margin: 10px 0;">
+                                <p><strong>Configuración Personalizada:</strong> <span style="color: #28a745; font-weight: bold;"><field name="custom_days_threshold"/> días</span></p>
+                                <p><strong>Ejemplos de configuración:</strong></p>
+                                <ul>
+                                    <li><strong>30 días:</strong> 1 mes sin stock</li>
+                                    <li><strong>90 días:</strong> 3 meses sin stock</li>
+                                    <li><strong>180 días:</strong> 6 meses sin stock</li>
+                                    <li><strong>300 días:</strong> 10 meses sin stock</li>
+                                    <li><strong>365 días:</strong> 1 año sin stock</li>
+                                </ul>
+                            </div>
+                            <div class="alert alert-warning" invisible="hide_strategy != 'all_out_of_stock'" style="margin: 10px 0;">
+                                <p><strong>⚠️ Advertencia:</strong> Esta estrategia oculta <strong>inmediatamente</strong> todos los productos sin stock, sin considerar tiempo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <notebook style="margin-top: 20px;">
+                        <page string="🚫 Excepciones" name="exceptions">
+                            <div style="padding: 15px;">
+                                <group>
+                                    <group string="Productos Excluidos" style="margin-right: 15px;">
+                                        <field name="exclude_product_ids" 
+                                               widget="many2many_tags"
+                                               options="{'no_create': True}"
+                                               help="Productos que NUNCA se ocultarán"/>
+                                    </group>
+                                    <group string="Categorías Excluidas" style="margin-left: 15px;">
+                                        <field name="exclude_category_ids" 
+                                               widget="many2many_tags"
+                                               options="{'no_create': True}"
+                                               help="Categorías que NUNCA se ocultarán"/>
+                                    </group>
+                                </group>
+                            </div>
+                        </page>
+                        
+                        <page string="📋 Información" name="info">
+                            <div style="padding: 20px;">
+                                <div class="alert alert-info" role="alert">
+                                        <h4>🎯 Estrategias de Ocultación</h4>
+                                    <ul>
+                                        <li><strong>Todos los productos sin stock:</strong> Oculta inmediatamente cualquier producto que tenga stock 0.</li>
+                                        <li><strong>Inteligente basado en tiempo:</strong> Oculta productos después del tiempo que configures (por defecto 300 días = 10 meses).</li>
+                                        <li><strong>Personalizado por días:</strong> Oculta productos después del número exacto de días que configures.</li>
+                                    </ul>
+                                    
+                                    <h4>⏱️ Configuración de Tiempo Recomendada</h4>
+                                    <ul>
+                                        <li><strong>7-15 días:</strong> Para productos perecederos</li>
+                                        <li><strong>30-60 días:</strong> Para productos de alta rotación</li>
+                                        <li><strong>90-180 días:</strong> Para productos estacionales</li>
+                                        <li><strong>300+ días:</strong> Para productos especializados o de lenta rotación</li>
+                                    </ul>
+                                    
+                                    <h4>🔧 Comportamiento</h4>
+                                    <ul>
+                                        <li><strong>Ocultar Completamente:</strong> Los productos no aparecen en la web en absoluto.</li>
+                                        <li><strong>Mostrar Notificación:</strong> Los productos aparecen pero marcados como "Agotado".</li>
+                                    </ul>
+                                    
+                                    <h4>⏰ Automatización</h4>
+                                    <p>Si está habilitada la <strong>Actualización Automática</strong>, el sistema ejecutará la evaluación todos los días a las 2:00 AM.</p>
+                                </div>
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+                
+                <div class="oe_chatter" style="margin-top: 20px;">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for Hide Stock Configuration -->
+    <record id="view_hide_stock_config_tree" model="ir.ui.view">
+        <field name="name">hide.stock.config.list</field>
+        <field name="model">hide.stock.config</field>
+        <field name="arch" type="xml">
+            <list string="Configuraciones de Ocultación por Stock">
+                <field name="website_id"/>
+                <field name="active" widget="boolean_toggle"/>
+                <field name="hide_strategy"/>
+                <field name="products_hidden_count"/>
+                <field name="last_update"/>
+                <button name="action_update_product_visibility" 
+                        string="🔄" 
+                        type="object" 
+                        title="Actualizar visibilidad"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action for Hide Stock Configuration -->
+    <record id="action_hide_stock_config" model="ir.actions.act_window">
+        <field name="name">Configuración de Ocultación por Stock</field>
+        <field name="res_model">hide.stock.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="help">
+            Configura cómo y cuándo ocultar productos sin stock del sitio web de comercio electrónico.
+            
+            • Estrategias flexibles para diferentes necesidades
+            • Ocultación inteligente basada en tiempo
+            • Excepciones para productos específicos
+            • Actualización automática programada
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_hide_stock_config_root"
+              name="Ocultar Sin Stock"
+              parent="website.menu_website_configuration"
+              sequence="50"/>
+
+    <menuitem id="menu_hide_stock_config"
+              name="Configuración de Ocultación"
+              action="action_hide_stock_config"
+              parent="menu_hide_stock_config_root"
+              sequence="10"/>
+
+</odoo>

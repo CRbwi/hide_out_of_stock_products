@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hide_stock_config_user,hide.stock.config.user,model_hide_stock_config,base.group_user,1,1,1,0
+access_hide_stock_config_manager,hide.stock.config.manager,model_hide_stock_config,website.group_website_designer,1,1,1,1
+access_hide_stock_config_admin,hide.stock.config.admin,model_hide_stock_config,base.group_system,1,1,1,1
+access_hide_stock_config_portal,hide.stock.config.portal,model_hide_stock_config,base.group_portal,1,0,0,0
+access_hide_stock_config_public,hide.stock.config.public,model_hide_stock_config,base.group_public,1,0,0,0
+access_product_template_portal,product.template.portal,product.model_product_template,base.group_portal,1,0,0,0
+access_product_template_public,product.template.public,product.model_product_template,base.group_public,1,0,0,0
+access_product_product_portal,product.product.portal,product.model_product_product,base.group_portal,1,0,0,0
+access_product_product_public,product.product.public,product.model_product_product,base.group_public,1,0,0,0
+access_website_sale_portal,website.sale.portal,website_sale.model_website,base.group_portal,1,0,0,0
+access_website_sale_public,website.sale.public,website_sale.model_website,base.group_public,1,0,0,0

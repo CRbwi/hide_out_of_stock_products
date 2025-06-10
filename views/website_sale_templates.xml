@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Template to show "Out of Stock" message -->
+    <template id="product_out_of_stock_message" name="Mensaje de Producto Agotado">
+        <div class="alert alert-warning text-center" role="alert" style="margin: 20px 0;">
+            <i class="fa fa-exclamation-triangle fa-2x mb-2"></i>
+            <h4>Producto Temporalmente Agotado</h4>
+            <p>Este producto no está disponible en este momento. Contacta con nosotros para más información sobre disponibilidad.</p>
+        </div>
+    </template>
+
+    <!-- Simple template inheritance for product price display -->
+    <template id="product_price_inherit_hide_stock" inherit_id="website_sale.product_price">
+        <xpath expr="//span[hasclass('oe_price')]" position="after">
+            <t t-if="product.is_hidden_by_stock">
+                <t t-call="hide_out_of_stock_products.product_out_of_stock_message"/>
+            </t>
+        </xpath>
+    </template>
+
+    <!-- Template for admin notification about hidden products -->
+    <template id="admin_hidden_products_notification" name="Notificación Admin Productos Ocultos">
+        <div class="alert alert-info" t-if="request.env.user.has_group('base.group_system')" role="alert">
+            <strong>Modo Administrador:</strong> Este producto está oculto por falta de stock.
+            <a href="/web#action=hide_out_of_stock_products.action_hide_stock_config" class="alert-link">
+                Gestionar configuración
+            </a>
+        </div>
+    </template>
+
+</odoo>

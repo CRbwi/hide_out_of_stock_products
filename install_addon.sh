@@ -1,0 +1,58 @@
+#!/bin/bash
+
+echo "=== HIDE OUT OF STOCK PRODUCTS ADDON INSTALLER ==="
+echo ""
+
+echo "Addon Location: /DATA/AppData/big-bear-odoo/data/addons/hide_out_of_stock_products"
+echo "Version: 18.0.1.0.2"
+echo ""
+
+echo "🔗 INSTALLATION METHODS:"
+echo ""
+echo "Method 1 - Web Interface:"
+echo "  1. Open: http://localhost:8069"
+echo "  2. Login to Odoo"
+echo "  3. Go to Apps menu"
+echo "  4. Click 'Update Apps List'"
+echo "  5. Search for 'Hide Out of Stock Products'"
+echo "  6. Click Install"
+echo ""
+
+echo "Method 2 - Direct Module URL:"
+echo "  1. Open: http://localhost:8069/web#action=base.open_module_tree&menu_id="
+echo "  2. Search for 'hide_out_of_stock_products'"
+echo "  3. Click Install"
+echo ""
+
+echo "Method 3 - Settings > Technical:"
+echo "  1. Go to Settings > Technical > Modules > Modules"
+echo "  2. Remove any filters"
+echo "  3. Search for 'hide_out_of_stock_products'"
+echo "  4. If found, click Install"
+echo ""
+
+echo "🔄 TROUBLESHOOTING:"
+echo "  If addon not visible:"
+echo "  - Restart Odoo container: sudo docker restart big-bear-odoo"
+echo "  - Update Apps List in Odoo"
+echo "  - Check addon files are in correct location"
+echo ""
+
+echo "📍 ADDON STATUS:"
+echo "✅ Addon created successfully"
+echo "✅ Models: HideStockConfig, ProductTemplate extensions"
+echo "✅ Views: Configuration forms, product views, dashboard"
+echo "✅ Security: Access rules defined"
+echo "✅ Automation: Cron job for daily updates"
+echo "✅ Version: Updated to 18.0.1.0.2"
+echo ""
+
+echo "🎯 NEXT STEPS AFTER INSTALLATION:"
+echo "1. Go to Website > Configuration > Hide Stock Config"
+echo "2. Create a new configuration"
+echo "3. Choose hiding strategy"
+echo "4. Test the functionality"
+echo ""
+
+echo "To run this installer:"
+echo "chmod +x install_addon.sh && ./install_addon.sh"
