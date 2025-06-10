@@ -2,7 +2,7 @@
 
 Este addon permite ocultar automáticamente productos sin stock del sitio web de comercio electrónico de Odoo, con funcionalidad inteligente para priorizar productos que llevan más tiempo agotados.
 
-## 🎯 Características Principales
+## Características Principales
 
 ### Estrategias de Ocultación
 - **Todos los productos sin stock**: Oculta inmediatamente cualquier producto con stock 0
@@ -18,13 +18,13 @@ Este addon permite ocultar automáticamente productos sin stock del sitio web de
 - ✅ Logs detallados de cambios
 - ✅ Opciones de mostrar vs ocultar completamente
 
-## 🚀 Instalación
+## Instalación
 
 1. Copia la carpeta `hide_out_of_stock_products` a tu directorio de addons
 2. Actualiza la lista de aplicaciones en Odoo
 3. Instala el addon "Hide Out of Stock Products"
 
-## ⚙️ Configuración
+## ⚙Configuración
 
 ### Configuración Básica
 1. Ve a **Sitio Web > Configuración > Ocultar Sin Stock > Configuración de Ocultación**
@@ -39,7 +39,7 @@ Este addon permite ocultar automáticamente productos sin stock del sitio web de
 - **Comportamiento**: Ocultar completamente vs mostrar como "agotado"
 - **Automatización**: Activar/desactivar actualización automática diaria
 
-## 📊 Dashboard y Monitoreo
+## Dashboard y Monitoreo
 
 ### Ver Estadísticas
 - Total de productos
@@ -52,7 +52,7 @@ Este addon permite ocultar automáticamente productos sin stock del sitio web de
 - Botones para mostrar/ocultar productos individuales
 - Restauración masiva de productos
 
-## 🔄 Automatización
+## Automatización
 
 ### Cron Job Automático
 - Se ejecuta diariamente a las 2:00 AM
@@ -64,7 +64,7 @@ Este addon permite ocultar automáticamente productos sin stock del sitio web de
 - Botón "Actualizar Ahora" en la configuración
 - Análisis sin cambios con "Ejecutar Análisis"
 
-## 🎛️ Casos de Uso
+## Casos de Uso
 
 ### Tienda con Muchos Productos Descontinuados
 ```
@@ -89,7 +89,7 @@ Excepciones: Categoría "Productos Estacionales"
 Ocultar: Completamente
 ```
 
-## 🔧 Funcionalidades Técnicas
+## Funcionalidades Técnicas
 
 ### Campos Agregados a Productos
 - `is_hidden_by_stock`: Boolean que indica si está oculto
@@ -102,7 +102,7 @@ Ocultar: Completamente
 - Modificación de dominios de búsqueda
 - Templates personalizados para productos agotados
 
-## 📝 Logs y Seguimiento
+## Logs y Seguimiento
 
 El addon registra automáticamente:
 - Productos que se ocultan/muestran
@@ -110,7 +110,7 @@ El addon registra automáticamente:
 - Estadísticas de ejecución del cron
 - Errores y advertencias
 
-## 🛠️ Desarrollo y Personalización
+## 🛠Desarrollo y Personalización
 
 ### Métodos Principales
 - `_should_hide_product()`: Lógica de decisión
@@ -122,7 +122,7 @@ El addon registra automáticamente:
 - Extend `_should_hide_product()` para lógica adicional
 - Modify templates para UI personalizada
 
-## 🎨 Interfaz de Usuario
+## Interfaz de Usuario
 
 ### Vistas Administrativas
 - Configuración con wizard intuitivo
@@ -147,7 +147,7 @@ El addon registra automáticamente:
 - Configurar excepciones para reducir procesamiento
 - Monitorear logs para identificar productos problemáticos
 
-## 🔒 Seguridad
+## Seguridad
 
 ### Permisos
 - **Usuarios**: Solo lectura de configuraciones
@@ -159,7 +159,7 @@ El addon registra automáticamente:
 - Prevención de configuraciones conflictivas
 - Logs de seguridad para cambios importantes
 
-## 📞 Soporte
+##  Soporte
 
 Para soporte técnico o personalizaciones:
 - Revisa los logs de Odoo para errores
